@@ -1,0 +1,51 @@
+%creates cell with objects needed for estimation
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%General Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+setup_obj=cell(16,1);
+%number of draws after burn-in 
+number_of_draws=1000;
+%length of burn in (cafter calibrating scaling factor for the case of
+%standard RW proposal)
+burn_in=100;
+%number of draws for choosing the scaling matrix in case of standard RW
+%proposal
+scaling_draws=10000;
+%scaling is recomputed after check_scaling draws
+check_scaling=1000;
+%initial scaling for standard RW proposal
+initial_scaling=0.1;
+%proposal=1 ->standard RW
+%proposal=2 ->adaptive RW
+proposal=1;
+%log likelihood computation
+%likelihood=1 -> SS KF
+%likelihood=2 ->  KF
+%likelihood=3 -> user-supplied logL
+likelihood=1;
+%name of likelihood function in case of likelihood=3
+likelihood_function='empty';
+%name of function that evaluates log prior
+prior_function='prior';
+%length of parameter vector
+length_param_vector=10;
+%parameter transformations (we want proposal to be unrestricted)
+length_log=0;
+index_log=[];
+length_logit=0;
+index_logit=[];
+%initial value for the state and covariance of the state
+state_initial=zeros(length_param_vector,1);
+cov_initial=eye(length_param_vector);
+
+%collect all information in setup_obj
+setup_obj{1}=number_of_draws;
+setup_obj{2}=burn_in;
+setup_obj{3}=scaling_draws;
+setup_obj{4}=check_scaling;
+setup_obj{5}=initial_scaling;
+setup_obj{6}=proposal;
+setup_obj{7}=likelihood;
+setup_obj{8}=likelihood_function;
+setup_obj{8}=likelihood_function;
